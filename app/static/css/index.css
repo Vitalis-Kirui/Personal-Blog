@@ -1,14 +1,12 @@
 h1 {
     text-align:center;
-    font-family: 'Josefin Sans',
-    sans-serif;
+    font-family: 'Josefin Sans',sans-serif;
     font-size:50px;
 }
 
 #welcomeText{
     text-align:center;
-    font-family: 'Charm',
-    cursive;
+    font-family: 'Charm',cursive;
 }
 
 p{
