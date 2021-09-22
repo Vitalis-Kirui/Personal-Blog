@@ -4,7 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:vitalis@localhost/fsociety'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:Computer757575.@localhost/fsociety'
 
 class ProdConfig(Config):
     '''
