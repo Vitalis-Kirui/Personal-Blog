@@ -126,3 +126,13 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/subscribe')
+@login_required
+def subscribe():
+
+    subs = Subscriber(email=current_user.email)
+    db.session.add(subs)
+    db.session.commit()
+    subs.save_subscriber()
+    return redirect(url_for("main.index"))
