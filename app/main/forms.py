@@ -18,6 +18,11 @@ class CommentForm(FlaskForm):
     comment = TextAreaField('COMMENT ON BLOG')
     submit = SubmitField('SUBMIT')
 
+class UpdateBlogForm(FlaskForm):
+    blog_title = StringField("Title", validators=[Required()])
+    blog_content = TextAreaField("Type Away", validators=[Required()])
+    submit = SubmitField("Update")
+
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
