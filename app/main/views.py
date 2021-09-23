@@ -30,6 +30,7 @@ def new_blog():
                         user_id=current_user.id)
         new_blog.save_blog()
 
+        return redirect(url_for(".index", id=new_blog.id))
     return render_template("new_blog.html", newblogform=newblogform)
 
 @main.route('/user/<uname>')
