@@ -4,7 +4,7 @@ from .forms import UpdateProfile
 from .. import db,photos
 from ..requests import get_quote
 from flask_login import current_user, login_required
-from ..models import User, Blog
+from ..models import User, Blog, Comment
 from app.main.forms import BlogForm
 from datetime import datetime
 
@@ -32,6 +32,27 @@ def new_blog():
 
         return redirect(url_for(".index", id=new_blog.id))
     return render_template("new_blog.html", newblogform=newblogform)
+
+@main.route("/blog/<int:id>", methods=["POST", "GET"])
+@login_required
+def write_comment(id):
+    blog = Blog.getBlogId(id)
+    comment = Comment.get_comments(id)
+    comment_form = CommentForm()
+
+    if comment_form.validate_on_submit():
+        comment = comment_form.comment.data
+        comment_form.comment.data = ""
+        new_comment = Comment(comment=comment,
+                              user_id=current_user.id,
+                              blog_id=blog.id)
+        new_comment.save_comment()
+        return redirect(url_for(".write_comment", id=blog.id))
+
+    return render_template("comment.html",
+                           comment_form=comment_form,
+                           comment=comment,
+                           blog=blog)
 
 @main.route('/user/<uname>')
 def profile(uname):
