@@ -54,6 +54,15 @@ def write_comment(id):
                            comment=comment,
                            blog=blog)
 
+@main.route("/blog/<int:id>/delete")
+@login_required
+def delete_blog(id):
+    blog = Blog.getBlogId(id)
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect(url_for(".index", id=blog.id))
+
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
