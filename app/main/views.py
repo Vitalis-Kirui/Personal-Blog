@@ -4,7 +4,7 @@ from .forms import UpdateProfile
 from .. import db,photos
 from ..requests import get_quote
 from flask_login import current_user, login_required
-from ..models import User, Blog, Comment
+from ..models import User, Blog, Comment,Subscriber
 from app.main.forms import BlogForm,CommentForm
 from datetime import datetime
 
