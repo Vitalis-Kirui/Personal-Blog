@@ -18,6 +18,7 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
     blog = db.relationship("Blog", backref="user", lazy="dynamic")
+    comment = db.relationship("Comment", backref="user", lazy="dynamic")
 
     @property
     def password(self):
@@ -45,6 +46,7 @@ class Blog(db.Model):
     blog_content = db.Column(db.String)
     posted_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    comment = db.relationship('Comment', backref='blog', lazy="dynamic")
 
     def save_blog(self):
         db.session.add(self)
@@ -67,6 +69,37 @@ class Blog(db.Model):
     @classmethod
     def get_all_blogs(cls):
         return Blog.query.order_by(Blog.posted_at).all()
+
+class Comment(db.Model):
+    """
+    User comment model for each blog 
+    """
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(255))
+    comment_date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_comment(self):
+        db.session.remove(self)
+        db.session.commit()
+
+    @classmethod
+    def getCommentId(cls, id):
+        comment = Comment.query.filter_by(id=id).first()
+        return comment
+
+    @classmethod
+    def get_comments(self, id):
+        comment = Comment.query.order_by(
+            Comment.comment_date.desc()).filter_by(blog_id=id).all()
+        return comment
 
 class Quote:
     """
