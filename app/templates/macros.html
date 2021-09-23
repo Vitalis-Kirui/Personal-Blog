@@ -42,6 +42,10 @@
         <p style="font-size:13pt">{{comment.comment}}</p>
         <p style="font-size:9pt; color:grey">Dated: {{comment.comment_date.strftime('%B %d, %Y')}}</p>
         <p style="font-size:11pt"> By : {{comment.user.username}}</p>
+
+        <a href="{{url_for('main.delete_comment',id = comment.id)}}" type="button" style="border: none;"
+            class=" btn btn-warning d-flex">Delete
+        </a>
     </div>
 </div>
 {%endfor%}
