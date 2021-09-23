@@ -20,7 +20,7 @@ class CommentForm(FlaskForm):
 
 class UpdateBlogForm(FlaskForm):
     blog_title = StringField("Title", validators=[Required()])
-    blog_content = TextAreaField("Type Away", validators=[Required()])
+    blog_content = TextAreaField("Type Updates", validators=[Required()])
     submit = SubmitField("Update")
 
 
