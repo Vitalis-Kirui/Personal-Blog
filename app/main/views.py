@@ -62,6 +62,23 @@ def delete_blog(id):
     db.session.commit()
     return redirect(url_for(".index", id=blog.id))
 
+@main.route('/update/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_blog(id):
+    blog = Blog.query.get_or_404(id)
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog.blog_title = form.blog_title.data
+        blog.blog_content = form.blog_content.data
+        db.session.add(blog)
+        db.session.commit()
+
+        return redirect(url_for('.index'))
+    elif request.method == 'GET':
+        form.blog_title.data = blog.blog_title
+        form.blog_content.data = blog.blog_content
+    return render_template('update.html', blog=blog, form=form)
+
 
 @main.route('/user/<uname>')
 def profile(uname):
