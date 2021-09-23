@@ -3,16 +3,34 @@ from . import main
 from .forms import UpdateProfile
 from .. import db,photos
 from ..requests import get_quote
-from flask_login import login_required
-from ..models import User
+from flask_login import current_user, login_required
+from ..models import User, Blog
+from app.main.forms import BlogForm
+from datetime import datetime
 
-@main.route('/', methods=["GET","BLOG"])
+@main.route("/", methods=["GET", "BLOG"])
 def index():
-    '''
-    View root page function that returns the index page and its data
-    '''
+    blogs = Blog.get_all_blogs()
     quote = get_quote()
-    return render_template('index.html', quote=quote)
+
+    return render_template("index.html", blogs=blogs,quote=quote)
+
+@main.route("/blog/new", methods=["POST", "GET"])
+@login_required
+def new_blog():
+    newblogform = BlogForm()
+    if newblogform.validate_on_submit():
+        blog_title = newblogform.blog_title.data
+        newblogform.blog_title.data = ""
+        blog_content = newblogform.blog_content.data
+        newblogform.blog_content.data = ""
+        new_blog = Blog(blog_title=blog_title,
+                        blog_content=blog_content,
+                        posted_at=datetime.now(),
+                        user_id=current_user.id)
+        new_blog.save_blog()
+
+    return render_template("new_blog.html", newblogform=newblogform)
 
 @main.route('/user/<uname>')
 def profile(uname):
