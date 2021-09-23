@@ -1,0 +1,4 @@
+Hello {{user.username}}
+Welcome to F-Society
+I have just seen you signed up in my blog. Feel free to leave feedback and comments 
+on the blogs. Welcome.
