@@ -2,15 +2,45 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 {% import 'macros.html' as macro %}
 
-{%block content%}
-<h3 class="text-center text-uppercase" style="color:navy">Blog comment</h3>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charm&display=swap" rel="stylesheet">
+
+</head>
+
+{%block content%}
+
+<style>
+    h3 {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 40px;
+        color: blue
+    }
+
+    label {
+        font-size: 25px;
+        color: blue;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+</style>
 <div class="container">
-    <hr>
     <div class="row">
         <div class="col-md-6">
-            <h3 class="pt-3" style="font-size: 20pt; color:navy"><b>{{blog.blog_title}}</b></h3>
-            <p style="font-size: 15pt;">{{blog.blog_content}}</p>
+            <h3 class="pt-3" style="font-size: 24px; color:navy"><b>{{blog.blog_title}}</b></h3>
+            <p style="font-family: 'Charm',cursive; font-size:24px">{{blog.blog_content}}</p>
         </div>
         <div class="col-md-6">
             {{ wtf.quick_form(comment_form) }}
@@ -19,6 +49,7 @@
     <hr>
     <div class="row">
         <h3 class="text-center text-uppercase" style="color:navy">Comments</h3>
+        <hr>
         {{macro.displayComments(comment)}}
     </div>
 
