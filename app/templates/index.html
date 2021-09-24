@@ -47,10 +47,23 @@
     color: rgb(0, 255, 55);
     }
 
+    body{
+        background-color:rgb(179, 166, 166)
+    }
+
+    .quote{
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    .quotes{
+        background-color:rgb(195, 244, 253);
+        margin-top: -20px;
+    }
 
 </style>
 
-<div class="container">
+<div class="container-fluid quotes">
 
     <h1>Welcome to F-Society</h1>
     <p id="welcomeText">I am Vitalis and this is my personal blog, Welcome.</p>
@@ -62,17 +75,17 @@
     </div>
 
     <div class="row" style="margin-top:3%">
-        <a type="button" class="btn btn-primary text-center" style="margin-left:40%;font-family: 'Charm',cursive;
+        <a type="button" class="btn btn-primary text-center" style="margin-left:45%;font-family: 'Charm',cursive;
         font-size:25px;" href="{{url_for('main.new_blog')}}">
             Create a New Blog
         </a>
+        <hr>
     </div>
 
 </div>
 
 <div class="container">
-    <h2 class="card-title h1-responsive text-center"></h2>
-    <hr>
+    <h2 class="card-title h1-responsive text-center" style="color:black;">Blogs</h2>
     <div class="row">
         {{macro.displayBlogs(blogs)}}
     </div>
