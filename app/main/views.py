@@ -7,6 +7,7 @@ from flask_login import current_user, login_required
 from ..models import User, Blog, Comment,Subscriber
 from app.main.forms import BlogForm,CommentForm
 from datetime import datetime
+import markdown2 
 
 @main.route("/", methods=["GET", "BLOG"])
 def index():
