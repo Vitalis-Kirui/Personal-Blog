@@ -54,7 +54,7 @@ def write_comment(id):
                            comment=comment,
                            blog=blog)
 
-@main.route("/blog/<int:id>/delete")
+@main.route("/blog/<int:id>/delete", methods=["POST"])
 @login_required
 def delete_comment(id):
     comment = Comment.getCommentId(id)
