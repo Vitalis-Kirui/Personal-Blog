@@ -1,4 +1,5 @@
 import os
+import re
 
 class Config:
     '''
@@ -19,6 +20,10 @@ class Config:
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
 
+    @staticmethod
+    def init_app(app):
+        pass
+
 class ProdConfig(Config):
     '''
     Production  configuration child class
@@ -27,6 +32,9 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace(
+            "postgres://", "postgresql://")
     DEBUG = True
 
 class DevConfig(Config):
@@ -36,7 +44,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:Computer757575.@localhost/fsociety'
     DEBUG = True
 
 config_options = {
